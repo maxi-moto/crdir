@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 
 static void logError(const string message) {
-  cout << "[ERROR]:" << message << endl;
+  cout << "[ERROR]: " << message << endl;
   exit(0);
 }
 

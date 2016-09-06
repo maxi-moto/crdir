@@ -5,7 +5,7 @@ class Directory
 {
   public:
     vector<string> open(string dirPath);
-    string find(string currentDir, string targetDir);
+    string find(vector<string> currentLevelDirs, string targetDir);
 
   private:
 };

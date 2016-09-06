@@ -35,18 +35,30 @@ vector<string> Directory::open(string dirPath)
   return dirs;
 }
 
-string Directory::find(string currentDirPath, string targetDir)
+string Directory::find(vector<string> currentLevelDirs, string targetDir)
 {
-  vector<string> dirs = open(currentDirPath);
+  vector<string> nextLevelDirs;
+  string currentDirLevel;
+  string currentDir;
 
-  for (int i = 0; i < dirs.size(); i++)
+  for (int i = 0; i < currentLevelDirs.size(); i++)
   {
-    if (dirs.at(i) == targetDir)
+    currentDirLevel = currentLevelDirs.at(i);
+    vector<string> dirs = open(currentDirLevel);
+
+    for (int j = 0; j < dirs.size(); j++)
     {
-      return currentDirPath + "/" + targetDir;
+      currentDir = dirs.at(j);
+      if(currentDir == targetDir)
+      {
+        return currentDirLevel + "/" + targetDir;
+      }
+      else
+      {
+        nextLevelDirs.push_back(currentDirLevel + "/" + currentDir);
+      }
     }
   }
 
-  return "NEVER FOUND";
+  return find(nextLevelDirs, targetDir);
 }
-
