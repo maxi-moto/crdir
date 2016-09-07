@@ -49,7 +49,9 @@ string Directory::find(vector<string> currentLevelDirs, string targetDir)
     for (int j = 0; j < dirs.size(); j++)
     {
       currentDir = dirs.at(j);
-      if(currentDir == targetDir)
+      if (currentDir == "." || currentDir == "..") continue;
+
+      if (currentDir == targetDir)
       {
         return currentDirLevel + "/" + targetDir;
       }
