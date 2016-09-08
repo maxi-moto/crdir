@@ -1,4 +1,3 @@
 *.swp
 
-# my compiled name
-crdir
+bin
