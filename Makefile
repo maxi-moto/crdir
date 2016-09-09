@@ -1,18 +1,23 @@
+SRCDIR = ./src
+OBJDIR = ./obj
+
+SRCFILES = $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS = $(addprefix $(OBJDIR)/, $(notdir $(SRCFILES:.cpp=.o)))
+
 CC = g++
 CFLAGS = -g -Wall
 
-BIN = ./bin
-SRC = ./src
+all: create_directories crdir
 
-TARGET = crdir
+crdir:  $(OBJECTS)
+	$(CC) $(CFLAGS) -o $@ $^
 
-all: crdir
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CC) -c -o $@ $<
 
-crdir: directory
-	$(CC) $(CFLAGS) $(SRC)/crdir.cpp $(BIN)/*.o -o $(BIN)/$(TARGET)
-
-directory:
-	$(CC) -c $(SRC)/directory.cpp -o $(BIN)/directory.o
+create_directories:
+	mkdir -p $(OBJDIR)
 
 clean:
-	$(RM) $(BIN)/*.o $(BIN)/$(TARGET)
+	-rm -r $(OBJDIR)
+	-rm crdir

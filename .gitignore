@@ -1,3 +1,6 @@
 *.swp
 
-bin
+# makefile build
+obj/
+crdir
+
