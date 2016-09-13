@@ -6,6 +6,7 @@ using std::string;
 
 #include <cstdlib>
 #include <dirent.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 
 #include "directory.h"
@@ -63,4 +64,18 @@ string Directory::find(vector<string> currentLevelDirs, string targetDir)
   }
 
   return find(nextLevelDirs, targetDir);
+}
+
+void Directory::make(string dirPath, string newDir)
+{
+  string newDirPath = dirPath + "/" + newDir;
+  cout << newDirPath << endl;
+  if (stat(newDirPath.c_str(), 0) == -1)
+  {
+    mkdir(newDirPath.c_str(), 0700);
+  }
+  else
+  {
+    logError("directory already exists");
+  }
 }

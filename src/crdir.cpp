@@ -29,8 +29,8 @@ int main(int argc, const char *argv[])
   Directory directory;
   vector<string> homePathVec (1, $HOME);
   string path = directory.find(homePathVec, targetDir);
-
-  cout << "PATH: " << path << endl;
+  cout << "[PATH]: " << path + newDir << endl;
+  directory.make(path, newDir);
 }
 
 void printUsage()
